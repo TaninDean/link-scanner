@@ -12,6 +12,7 @@ def get_linked(url: str) -> list:
     Return:
         list_hyper(list): list that contains all hyperlink.
     """
+    
     list_hyper = []
     browser = webdriver.Chrome()
     browser.get(url)
@@ -36,8 +37,10 @@ def is_valid_url(url: str) -> bool:
     Return:
         bool: True
     """
+    header = {'User-agent': 'Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5'}
+    request = urllib.request.Request(url, None, header)
     try:
-        if urllib.request.urlopen(url).getcode() == 200:
+        if urllib.request.urlopen(request).getcode() == 200:
             return True
         return False
     except urllib.error.HTTPError:
