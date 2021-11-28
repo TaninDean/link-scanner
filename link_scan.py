@@ -37,8 +37,9 @@ def is_valid_url(url: str) -> bool:
         bool: True
     """
     try:
-        urllib.request.urlopen(url)
-        return True
+        if urllib.request.urlopen(url).getcode() == 200:
+            return True
+        return False
     except urllib.error.HTTPError:
         return False
 
